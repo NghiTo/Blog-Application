@@ -21,6 +21,12 @@ public class PostServiceImpl implements PostService
         return postRepository.findAll(pageable).map(PostMapper::map);
     }
     @Override
+    public PostDto findById(Long id)
+    {
+        var post = postRepository.findById(id).get();
+        return PostMapper.map(post);
+    }
+    @Override
     public PostDto create(PostCreateForm form)
     {
         var post = PostMapper.map(form);
