@@ -2,14 +2,12 @@ package com.vti.blogapp.Controller;
 
 import com.vti.blogapp.Dto.PostDto;
 import com.vti.blogapp.Form.PostCreateForm;
+import com.vti.blogapp.Form.PostUpdateForm;
 import com.vti.blogapp.Service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -25,5 +23,10 @@ public class PostController
     public PostDto create(@RequestBody PostCreateForm form)
     {
         return postService.create(form);
+    }
+    @PutMapping("/api/v1/posts/{id}")
+    public PostDto update(@RequestBody PostUpdateForm form, @PathVariable("id") Long id)
+    {
+        return postService.update(form, id);
     }
 }

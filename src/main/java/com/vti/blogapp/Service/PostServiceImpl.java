@@ -2,6 +2,7 @@ package com.vti.blogapp.Service;
 
 import com.vti.blogapp.Dto.PostDto;
 import com.vti.blogapp.Form.PostCreateForm;
+import com.vti.blogapp.Form.PostUpdateForm;
 import com.vti.blogapp.Mapper.PostMapper;
 import com.vti.blogapp.Repository.PostRepository;
 import lombok.AllArgsConstructor;
@@ -14,18 +15,24 @@ import org.springframework.stereotype.Service;
 public class PostServiceImpl implements PostService
 {
     private final PostRepository postRepository;
-
     @Override
     public Page<PostDto> findAll(Pageable pageable)
     {
         return postRepository.findAll(pageable).map(PostMapper::map);
     }
-
     @Override
     public PostDto create(PostCreateForm form)
     {
         var post = PostMapper.map(form);
         var savePost = postRepository.save(post);
         return PostMapper.map(savePost);
+    }
+    @Override
+    public PostDto update(PostUpdateForm form, Long id)
+    {
+        var post = PostMapper.map(form);
+        post.setId(id);
+        var savedPost = postRepository.save(post);
+        return PostMapper.map(savedPost);
     }
 }
