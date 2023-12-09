@@ -3,6 +3,7 @@ package com.vti.blogapp.Mapper;
 import com.vti.blogapp.Dto.CommentDto;
 import com.vti.blogapp.Entity.Comment;
 import com.vti.blogapp.Form.CommentCreateForm;
+import com.vti.blogapp.Form.CommentUpdateForm;
 
 public class CommentMapper
 {
@@ -13,6 +14,12 @@ public class CommentMapper
         comment.setEmail(form.getEmail());
         comment.setBody(form.getBody());
         return comment;
+    }
+    public static void map(CommentUpdateForm form, Comment comment)
+    {
+        comment.setName(form.getName());
+        comment.setEmail(form.getEmail());
+        comment.setBody(form.getBody());
     }
     public static CommentDto map(Comment comment)
     {

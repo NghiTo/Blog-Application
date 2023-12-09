@@ -1,6 +1,8 @@
 package com.vti.blogapp.Controller;
 
+import com.vti.blogapp.Dto.CommentDto;
 import com.vti.blogapp.Dto.PostDto;
+import com.vti.blogapp.Form.CommentUpdateForm;
 import com.vti.blogapp.Form.PostCreateForm;
 import com.vti.blogapp.Form.PostUpdateForm;
 import com.vti.blogapp.Service.PostService;
@@ -39,4 +41,5 @@ public class PostController
     {
         postService.deleteById(id);
     }
+
 }
