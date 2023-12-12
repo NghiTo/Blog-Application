@@ -2,6 +2,7 @@ package com.vti.blogapp.Controller;
 
 import com.vti.blogapp.Dto.CommentDto;
 import com.vti.blogapp.Form.CommentCreateForm;
+import com.vti.blogapp.Form.CommentFilterForm;
 import com.vti.blogapp.Form.CommentUpdateForm;
 import com.vti.blogapp.Service.CommentService;
 import lombok.AllArgsConstructor;
@@ -15,9 +16,9 @@ public class CommentController
 {
     private final CommentService commentService;
     @GetMapping("/api/v1/comments")
-    public Page<CommentDto> findAll(Pageable pageable)
+    public Page<CommentDto> findAll(CommentFilterForm form, Pageable pageable)
     {
-        return commentService.findAll(pageable);
+        return commentService.findAll(form, pageable);
     }
     @GetMapping("/api/v1/posts/{postId}/comments")
     public Page<CommentDto> findByPostId(@PathVariable("postId") Long postId, Pageable pageable)

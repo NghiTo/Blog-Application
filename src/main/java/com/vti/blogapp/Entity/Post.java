@@ -31,7 +31,7 @@ public class Post
 
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at", nullable = false)
     @UpdateTimestamp

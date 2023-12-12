@@ -30,7 +30,7 @@ public class PostMapper
         dto.setTitle(post.getTitle());
         dto.setDescription(post.getDescription());
         dto.setContent(post.getContent());
-        dto.setCreateAt(post.getCreateAt());
+        dto.setCreateAt(post.getCreatedAt());
         dto.setUpdatedAt(post.getUpdatedAt());
         return dto;
     }
