@@ -1,17 +1,18 @@
 package com.vti.blogapp.Controller;
 
-import com.vti.blogapp.Dto.CommentDto;
 import com.vti.blogapp.Dto.PostDto;
-import com.vti.blogapp.Form.CommentUpdateForm;
 import com.vti.blogapp.Form.PostCreateForm;
 import com.vti.blogapp.Form.PostFilterForm;
 import com.vti.blogapp.Form.PostUpdateForm;
 import com.vti.blogapp.Service.PostService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+@Validated
 @RestController
 @AllArgsConstructor
 public class PostController
@@ -28,7 +29,7 @@ public class PostController
         return postService.findById(id);
     }
     @PostMapping("/api/v1/posts")
-    public PostDto create(@RequestBody PostCreateForm form)
+    public PostDto create(@RequestBody @Valid PostCreateForm form)
     {
         return postService.create(form);
     }
