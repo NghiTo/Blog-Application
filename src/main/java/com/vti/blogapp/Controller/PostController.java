@@ -6,6 +6,7 @@ import com.vti.blogapp.Form.PostFilterForm;
 import com.vti.blogapp.Form.PostUpdateForm;
 import com.vti.blogapp.Service.PostService;
 import com.vti.blogapp.Validation.PostIdExist;
+import com.vti.blogapp.Validation.PostTitleNotExist;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,7 +31,7 @@ public class PostController
         return postService.findById(id);
     }
     @PostMapping("/api/v1/posts")
-    public PostDto create(@RequestBody @Valid PostCreateForm form)
+    public PostDto create(@RequestBody @Valid @PostTitleNotExist PostCreateForm form)
     {
         return postService.create(form);
     }
@@ -44,5 +45,4 @@ public class PostController
     {
         postService.deleteById(id);
     }
-
 }

@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PostTitleNotExist
 {
-    String message() default "{post.id.Exists.message}";
+    String message() default "{post.tittle.exist.message}";
 
     Class<?>[] groups() default {};
 
