@@ -30,7 +30,7 @@ public class CommentController
         return commentService.findByPostId(postId, pageable);
     }
     @PostMapping("/api/v1/posts/{postId}/comments")
-    public CommentDto create(@RequestBody @Valid CommentCreateForm form, @PathVariable("postId") @PostIdExist Long postId)
+    public CommentDto create(@RequestBody @Valid CommentCreateForm form, @PathVariable("postId") Long postId)
     {
         return commentService.create(form, postId);
     }
