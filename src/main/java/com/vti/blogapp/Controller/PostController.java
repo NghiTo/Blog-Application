@@ -31,7 +31,7 @@ public class PostController
         return postService.findById(id);
     }
     @PostMapping("/api/v1/posts")
-    public PostDto create(@RequestBody @Valid @PostTitleNotExist PostCreateForm form)
+    public PostDto create(@RequestBody @Valid PostCreateForm form)
     {
         return postService.create(form);
     }

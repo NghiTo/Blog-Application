@@ -1,5 +1,6 @@
 package com.vti.blogapp.Form;
 
+import com.vti.blogapp.Validation.PostTitleNotExist;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,7 @@ public class PostUpdateForm
 {
     @NotBlank
     @Length(max = 50)
+    @PostTitleNotExist
     private String title;
 
     @NotBlank

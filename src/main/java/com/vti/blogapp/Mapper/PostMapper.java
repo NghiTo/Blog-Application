@@ -32,7 +32,7 @@ public class PostMapper
         dto.setContent(post.getContent());
         dto.setCreateAt(post.getCreatedAt());
         dto.setUpdatedAt(post.getUpdatedAt());
-        return dto;
+        return dto.withSelfRel();
     }
 }
 

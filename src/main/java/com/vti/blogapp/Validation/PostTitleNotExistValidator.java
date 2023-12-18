@@ -7,17 +7,18 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class PostTitleNotExistValidator implements ConstraintValidator<PostTitleNotExist, PostCreateForm>
+public class PostTitleNotExistValidator implements ConstraintValidator<PostTitleNotExist, String>
 {
     private final PostRepository postRepository;
-//    @Override
-//    public boolean isValid(String title, ConstraintValidatorContext context)
-//    {
-//        return !postRepository.existsByTitle(title);
-//    }
-
     @Override
-    public boolean isValid(PostCreateForm postCreateForm, ConstraintValidatorContext constraintValidatorContext) {
-        return !postRepository.existsByTitle(postCreateForm.getTitle());
+    public boolean isValid(String title, ConstraintValidatorContext context)
+    {
+        return !postRepository.existsByTitle(title);
     }
+
+//    @Override
+//    public boolean isValid(PostCreateForm postCreateForm, ConstraintValidatorContext constraintValidatorContext)
+//    {
+//        return !postRepository.existsByTitle(postCreateForm.getTitle());
+//    }
 }
