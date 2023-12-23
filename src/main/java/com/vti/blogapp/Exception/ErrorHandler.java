@@ -9,8 +9,10 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.*;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,7 +23,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 @ControllerAdvice
-public class ErrorHandler extends ResponseEntityExceptionHandler implements MessageSourceAware, AuthenticationEntryPoint
+public class ErrorHandler extends ResponseEntityExceptionHandler implements MessageSourceAware, AuthenticationEntryPoint, AccessDeniedHandler
 {
     private MessageSource messageSource;
     @Override
@@ -71,6 +73,16 @@ public class ErrorHandler extends ResponseEntityExceptionHandler implements Mess
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         var message = getMessage("AuthenticationException.message");
+        var error = new ErrorResponse(message);
+        var out = response.getOutputStream();
+        new ObjectMapper().writeValue(out, error);
+    }
+    @Override
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException exception) throws IOException, ServletException
+    {
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        var message = getMessage("AccessDeniedException.message");
         var error = new ErrorResponse(message);
         var out = response.getOutputStream();
         new ObjectMapper().writeValue(out, error);
