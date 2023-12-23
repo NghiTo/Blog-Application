@@ -22,6 +22,8 @@ public class SecurityConfiguration
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(customizer -> customizer
+                        .requestMatchers(HttpMethod.DELETE)
+                        .hasAuthority("SCOPE_ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/v1/users")
                         .permitAll()
                         .anyRequest()
